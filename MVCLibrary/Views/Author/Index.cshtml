@@ -1,0 +1,67 @@
+﻿@model MVCLibrary.Core.ViewModels.AuthorListViewModel
+
+@{
+    ViewBag.Title = "Authors";
+}
+
+<div class="container" ng-app="MVCLibrary" ng-controller="authorCtrl" ng-cloak>
+
+    <p>
+    @Html.ActionLink("Create New Author", "Create")
+    </p>
+
+    <h3> {{ status }} </h3>
+    <h2>
+        <ng-pluralize ng-show="authors != null" count="authors.length" when="authorsCount" ng-cloak></ng-pluralize>
+    </h2>
+
+    <input type="text" ng-show="authors.length > 0" ng-model="nameFilter" placeholder="Search by last name..." />
+
+    <div ng-show="authors.length > 0">
+        Filter by town: 
+        <select ng-model="selectedTown" ng-options="town.Name for town in towns">
+    </div>
+
+
+    </select>
+ 
+    <table>
+        <tr>
+            <th>
+                <a href="" ng-click="predicate = 'FirstName'; reverse=!reverse">First Name</a>
+            </th>
+
+            <th>
+                <a href="" ng-click="predicate = 'LastName'; reverse=!reverse">Last Name</a>
+            </th>
+
+            <th>
+                <a href="" ng-click="predicate = 'Books.length'; reverse=!reverse">Books</a>
+            </th>
+        </tr>
+
+        <tr ng-repeat="author in authors | townFilter:selectedTown | filter: searchFilter | orderBy:predicate:reverse" class=".repeated-item">
+            <td>
+                <a href="" ng-click="viewAuthor(author.AuthorID)"> {{author.FirstName}}</a>
+            </td>
+
+            <td>
+                <a href="" ng-click="viewAuthor(author.AuthorID)"> {{author.LastName}}</a>
+            </td>
+
+            <td>
+                {{ author.Books.length }}
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = 1 }) |
+                <a ng-click="deleteAuthor(author.AuthorID)">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div> <!-- CONTAINER -->
+
+@section Scripts {
+        <script src="@Url.Content("~/Scripts/app/services/authorService.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/app/controllers/authorCtrl.js")" type="text/javascript"></script>
+}

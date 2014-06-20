@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="LibraryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="LibraryContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Towns" EntityType="LibraryModel.Town" />
+    <EntitySet Name="Authors" EntityType="LibraryModel.Author" />
+    <EntitySet Name="Books" EntityType="LibraryModel.Book" />
+    <AssociationSet Name="TownAuthor" Association="LibraryModel.TownAuthor">
+      <End Role="Town" EntitySet="Towns" />
+      <End Role="Author" EntitySet="Authors" />
+    </AssociationSet>
+    <AssociationSet Name="AuthorBook" Association="LibraryModel.AuthorBook">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Town">
+    <Key>
+      <PropertyRef Name="TownID" />
+    </Key>
+    <Property Type="Int32" Name="TownID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Authors" Relationship="LibraryModel.TownAuthor" FromRole="Town" ToRole="Author" />
+  </EntityType>
+  <EntityType Name="Author">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Type="Int32" Name="AuthorID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Towns" Relationship="LibraryModel.TownAuthor" FromRole="Author" ToRole="Town" />
+    <NavigationProperty Name="Books" Relationship="LibraryModel.AuthorBook" FromRole="Author" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Type="Int32" Name="BookID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Author" Relationship="LibraryModel.AuthorBook" FromRole="Book" ToRole="Author" />
+    <Property Type="Int32" Name="AuthorID" Nullable="false" />
+  </EntityType>
+  <Association Name="TownAuthor">
+    <End Type="LibraryModel.Town" Role="Town" Multiplicity="*" />
+    <End Type="LibraryModel.Author" Role="Author" Multiplicity="*" />
+  </Association>
+  <Association Name="AuthorBook">
+    <End Type="LibraryModel.Author" Role="Author" Multiplicity="1" />
+    <End Type="LibraryModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

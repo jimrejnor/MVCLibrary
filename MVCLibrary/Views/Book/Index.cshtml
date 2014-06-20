@@ -1,0 +1,41 @@
+﻿@model MVCLibrary.Core.ViewModels.BookListViewModel
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<h2>Select your book</h2>
+
+<p>
+    @Html.ActionLink("Create New Book", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink("Book", "Index", new { sortOrder = ViewBag.SortNameParam })
+        </th>
+
+        <th>
+            Author
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var book in Model.Books) {
+    <tr>
+        <td>
+            @Html.ActionLink(book.Title, "View", new { id = book.BookID }, null)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => book.Author.FullName)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = book.BookID }) |
+            @Html.ActionLink("Delete", "Delete", new {  id = book.BookID  })
+        </td>
+    </tr>
+}
+</table>

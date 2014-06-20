@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LibraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="LibraryModelStoreContainer">
+    <EntitySet Name="Towns" EntityType="LibraryModel.Store.Towns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Authors" EntityType="LibraryModel.Store.Authors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Books" EntityType="LibraryModel.Store.Books" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TownAuthor" EntityType="LibraryModel.Store.TownAuthor" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_TownAuthor_Town" Association="LibraryModel.Store.FK_TownAuthor_Town">
+      <End Role="Town" EntitySet="Towns" />
+      <End Role="TownAuthor" EntitySet="TownAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TownAuthor_Author" Association="LibraryModel.Store.FK_TownAuthor_Author">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="TownAuthor" EntitySet="TownAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="AuthorBook" Association="LibraryModel.Store.AuthorBook">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Towns">
+    <Key>
+      <PropertyRef Name="TownID" />
+    </Key>
+    <Property Name="TownID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Authors">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TownAuthor">
+    <Key>
+      <PropertyRef Name="Towns_TownID" />
+      <PropertyRef Name="Authors_AuthorID" />
+    </Key>
+    <Property Name="Towns_TownID" Type="int" Nullable="false" />
+    <Property Name="Authors_AuthorID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AuthorBook">
+    <End Role="Author" Type="LibraryModel.Store.Authors" Multiplicity="1" />
+    <End Role="Book" Type="LibraryModel.Store.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownAuthor_Town">
+    <End Role="Town" Type="LibraryModel.Store.Towns" Multiplicity="1" />
+    <End Role="TownAuthor" Type="LibraryModel.Store.TownAuthor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="TownID" />
+      </Principal>
+      <Dependent Role="TownAuthor">
+        <PropertyRef Name="Towns_TownID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownAuthor_Author">
+    <End Role="TownAuthor" Type="LibraryModel.Store.TownAuthor" Multiplicity="*" />
+    <End Role="Author" Type="LibraryModel.Store.Authors" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="TownAuthor">
+        <PropertyRef Name="Authors_AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="LibraryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="LibraryContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Towns" EntityType="LibraryModel.Town" />
+          <EntitySet Name="Authors" EntityType="LibraryModel.Author" />
+          <EntitySet Name="Books" EntityType="LibraryModel.Book" />
+          <AssociationSet Name="TownAuthor" Association="LibraryModel.TownAuthor">
+            <End Role="Town" EntitySet="Towns" />
+            <End Role="Author" EntitySet="Authors" />
+          </AssociationSet>
+          <AssociationSet Name="AuthorBook" Association="LibraryModel.AuthorBook">
+            <End Role="Author" EntitySet="Authors" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Town">
+          <Key>
+            <PropertyRef Name="TownID" />
+          </Key>
+          <Property Type="Int32" Name="TownID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Authors" Relationship="LibraryModel.TownAuthor" FromRole="Town" ToRole="Author" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="AuthorID" />
+          </Key>
+          <Property Type="Int32" Name="AuthorID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Towns" Relationship="LibraryModel.TownAuthor" FromRole="Author" ToRole="Town" />
+          <NavigationProperty Name="Books" Relationship="LibraryModel.AuthorBook" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Type="Int32" Name="BookID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Author" Relationship="LibraryModel.AuthorBook" FromRole="Book" ToRole="Author" />
+          <Property Type="Int32" Name="AuthorID" Nullable="false" />
+        </EntityType>
+        <Association Name="TownAuthor">
+          <End Type="LibraryModel.Town" Role="Town" Multiplicity="*" />
+          <End Type="LibraryModel.Author" Role="Author" Multiplicity="*" />
+        </Association>
+        <Association Name="AuthorBook">
+          <End Type="LibraryModel.Author" Role="Author" Multiplicity="1" />
+          <End Type="LibraryModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="AuthorID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryContext">
+    <EntitySetMapping Name="Towns">
+      <EntityTypeMapping TypeName="IsTypeOf(LibraryModel.Town)">
+        <MappingFragment StoreEntitySet="Towns">
+          <ScalarProperty Name="TownID" ColumnName="TownID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Authors">
+      <EntityTypeMapping TypeName="IsTypeOf(LibraryModel.Author)">
+        <MappingFragment StoreEntitySet="Authors">
+          <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="IsTypeOf(LibraryModel.Book)">
+        <MappingFragment StoreEntitySet="Books">
+          <ScalarProperty Name="BookID" ColumnName="BookID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TownAuthor" TypeName="LibraryModel.TownAuthor" StoreEntitySet="TownAuthor">
+      <EndProperty Name="Town">
+        <ScalarProperty Name="TownID" ColumnName="Towns_TownID" />
+      </EndProperty>
+      <EndProperty Name="Author">
+        <ScalarProperty Name="AuthorID" ColumnName="Authors_AuthorID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

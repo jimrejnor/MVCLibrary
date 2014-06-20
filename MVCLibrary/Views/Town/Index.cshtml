@@ -1,0 +1,53 @@
+﻿@model MVCLibrary.Core.ViewModels.TownListViewModel
+
+@{
+    ViewBag.Title = "Towns";
+}
+
+<p>
+    @Html.ActionLink("Create New Town", "Create")
+</p>
+
+
+<div class="container" ng-app="MVCLibrary" ng-controller="townCtrl" ng-cloak>
+
+
+    <h3> {{ status }} </h3>
+    <h2>
+        <ng-pluralize ng-show="towns != null" count="towns.length" when="townsCount" ng-cloak></ng-pluralize>
+    </h2>
+
+    <input type="text" ng-show="towns.length > 0" ng-model="nameFilter" placeholder="Search..." />
+ 
+    <table>
+        <tr>
+            <th>
+                <a href="" ng-click="predicate = 'Name'; reverse=!reverse">Town</a>
+            </th>
+
+            <th>
+                <a href="" ng-click="predicate = 'Authors.length'; reverse=!reverse">Authors</a>
+            </th>
+        </tr>
+
+        <tr ng-repeat="town in towns | filter: searchFilter | orderBy:predicate:reverse" class=".repeated-item">
+            <td>
+                <a href="" ng-click="viewTown(town.TownID)"> {{town.Name}}</a>
+            </td>
+
+            <td>
+                {{ town.Authors.length }}
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = "town.TownID" }) |
+                <a ng-click="deleteTown(town.TownID)">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div> <!-- CONTAINER -->
+
+@section Scripts {
+        <script src="@Url.Content("~/Scripts/app/services/townService.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Scripts/app/controllers/townCtrl.js")" type="text/javascript"></script>
+}

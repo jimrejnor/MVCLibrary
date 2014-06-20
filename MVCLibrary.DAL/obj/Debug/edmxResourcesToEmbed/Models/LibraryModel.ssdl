@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LibraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="LibraryModelStoreContainer">
+    <EntitySet Name="Towns" EntityType="LibraryModel.Store.Towns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Authors" EntityType="LibraryModel.Store.Authors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Books" EntityType="LibraryModel.Store.Books" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TownAuthor" EntityType="LibraryModel.Store.TownAuthor" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_TownAuthor_Town" Association="LibraryModel.Store.FK_TownAuthor_Town">
+      <End Role="Town" EntitySet="Towns" />
+      <End Role="TownAuthor" EntitySet="TownAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TownAuthor_Author" Association="LibraryModel.Store.FK_TownAuthor_Author">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="TownAuthor" EntitySet="TownAuthor" />
+    </AssociationSet>
+    <AssociationSet Name="AuthorBook" Association="LibraryModel.Store.AuthorBook">
+      <End Role="Author" EntitySet="Authors" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Towns">
+    <Key>
+      <PropertyRef Name="TownID" />
+    </Key>
+    <Property Name="TownID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Authors">
+    <Key>
+      <PropertyRef Name="AuthorID" />
+    </Key>
+    <Property Name="AuthorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Books">
+    <Key>
+      <PropertyRef Name="BookID" />
+    </Key>
+    <Property Name="BookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TownAuthor">
+    <Key>
+      <PropertyRef Name="Towns_TownID" />
+      <PropertyRef Name="Authors_AuthorID" />
+    </Key>
+    <Property Name="Towns_TownID" Type="int" Nullable="false" />
+    <Property Name="Authors_AuthorID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="AuthorBook">
+    <End Role="Author" Type="LibraryModel.Store.Authors" Multiplicity="1" />
+    <End Role="Book" Type="LibraryModel.Store.Books" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownAuthor_Town">
+    <End Role="Town" Type="LibraryModel.Store.Towns" Multiplicity="1" />
+    <End Role="TownAuthor" Type="LibraryModel.Store.TownAuthor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Town">
+        <PropertyRef Name="TownID" />
+      </Principal>
+      <Dependent Role="TownAuthor">
+        <PropertyRef Name="Towns_TownID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TownAuthor_Author">
+    <End Role="TownAuthor" Type="LibraryModel.Store.TownAuthor" Multiplicity="*" />
+    <End Role="Author" Type="LibraryModel.Store.Authors" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Author">
+        <PropertyRef Name="AuthorID" />
+      </Principal>
+      <Dependent Role="TownAuthor">
+        <PropertyRef Name="Authors_AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
