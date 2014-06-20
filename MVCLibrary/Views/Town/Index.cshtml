@@ -38,9 +38,8 @@
             <td>
                 {{ town.Authors.length }}
             </td>
-
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = "town.TownID" }) |
+                <a href="Town/Edit/{{town.TownID}}">Edit</a>
                 <a ng-click="deleteTown(town.TownID)">Delete</a>
             </td>
         </tr>

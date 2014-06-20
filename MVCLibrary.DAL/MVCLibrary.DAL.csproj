@@ -51,7 +51,6 @@
     <Compile Include="Interface\IGenericRepository.cs" />
     <Compile Include="Interface\ITownRepository.cs" />
     <Compile Include="Interface\IUnitOfWork.cs" />
-    <Compile Include="LibrarySeed.cs" />
     <Compile Include="Models\Author.cs">
       <DependentUpon>LibraryModel.tt</DependentUpon>
     </Compile>

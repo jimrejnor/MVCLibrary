@@ -22,3 +22,11 @@ C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.DAL\bin\Debug\Entity
 C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.DAL\obj\Debug\MVCLibrary.DAL.csprojResolveAssemblyReference.cache
 C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.DAL\obj\Debug\MVCLibrary.DAL.dll
 C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.DAL\obj\Debug\MVCLibrary.DAL.pdb
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\bin\Debug\MVCLibrary.DAL.dll.config
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\bin\Debug\MVCLibrary.DAL.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\bin\Debug\MVCLibrary.DAL.pdb
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\bin\Debug\EntityFramework.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\bin\Debug\EntityFramework.xml
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\obj\Debug\MVCLibrary.DAL.csprojResolveAssemblyReference.cache
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\obj\Debug\MVCLibrary.DAL.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.DAL\obj\Debug\MVCLibrary.DAL.pdb

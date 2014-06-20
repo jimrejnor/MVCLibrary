@@ -34,3 +34,15 @@ C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.Core\bin\Debug\Entit
 C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.Core\obj\Debug\MVCLibrary.Core.csprojResolveAssemblyReference.cache
 C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.Core\obj\Debug\MVCLibrary.Core.dll
 C:\Users\jimrejnor\Desktop\MVCLibrary - StableV4\MVCLibrary.Core\obj\Debug\MVCLibrary.Core.pdb
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\AutoMapper.Net4.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\MVCLibrary.Core.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\MVCLibrary.Core.pdb
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\AutoMapper.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\MVCLibrary.DAL.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\EntityFramework.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\MVCLibrary.DAL.pdb
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\AutoMapper.xml
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\bin\Debug\EntityFramework.xml
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\obj\Debug\MVCLibrary.Core.csprojResolveAssemblyReference.cache
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\obj\Debug\MVCLibrary.Core.dll
+C:\Users\jimrejnor\Documents\GitHub\MVCLibrary\MVCLibrary.Core\obj\Debug\MVCLibrary.Core.pdb
